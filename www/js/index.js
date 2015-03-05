@@ -20,9 +20,18 @@ angular.module('corps', ['ngRoute'])
         $scope.world = 'World';
         console.log('test');
     })
-    .controller('MembersCtrl', function($scope){
-        $scope.members = [
-            {name: 'Fred', id: 123},
-            {name: 'Bob', id: 321}
-        ];
+    .controller('MembersCtrl', function($scope, $http){
+        console.log('in members ctrl');
+        $scope.members;
+        $scope.update = function(){
+
+        }
+        $http.get('/api/members')
+            .success(function(data) {
+                $scope.members = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
     });
